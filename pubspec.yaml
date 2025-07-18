@@ -1,0 +1,109 @@
+name: elka
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.1.0+3
+
+environment:
+  sdk: ^3.7.0
+dependencies:
+  animated_custom_dropdown: any
+  cached_network_image: ^3.4.1
+  collection: any
+  cupertino_icons: any
+  dio: any
+  file_picker: ^10.1.9
+  firebase_app_check: ^0.3.2+6
+  firebase_auth: ^5.5.2 
+  firebase_core: ^3.13.1
+  firebase_database: ^11.3.6
+  firebase_storage: ^12.4.6
+  flutter:
+    sdk: flutter
+  flutter_carousel_widget: any
+
+  flutter_localizations:
+    sdk: flutter
+  flutter_quill: ^11.0.0-dev.4
+  flutter_quill_extensions: ^11.0.0
+  syncfusion_flutter_core: any
+  flutter_touch_ripple: any
+  flutter_widget_from_html: any
+  google_sign_in: ^6.3.0
+  html: any
+  iconsax_plus: any
+  intl: any
+  mime: ^2.0.0
+  printing: any
+  provider: any
+  syncfusion_flutter_pdfviewer: ^29.2.7
+  timelines_plus: ^1.0.6
+  url_launcher: any
+  youtube_player_iframe: ^5.2.1
+  path: any
+  # freerasp: ^7.1.0
+  firebase_crashlytics: ^4.3.7
+  firebase_analytics: ^11.5.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  pdfx: ^2.9.2
+  universal_html: ^2.2.4
+dev_dependencies:
+  flutter_lints: ^5.0.0
+
+
+  flutter_test:
+    sdk: flutter
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - asset/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+   
+    - family: Futura
+      fonts:
+        - asset: fonts/Futura-Medium.ttf
+      
+        # - asset: fonts/Nunito-ExtraBold.ttf
+        #   weight: 900
+    - family: Monserrat
+      fonts:
+        - asset: fonts/Montserrat-Medium.ttf
+        - asset: fonts/Montserrat-ExtraBold.ttf
+          weight: 700
+        # - asset: fonts/Nunito-ExtraBold.ttf
+        #   weight: 900  

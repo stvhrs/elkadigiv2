@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "969146186573",
+    "firebase_url": "https://elkapede-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "elkapede",
+    "storage_bucket": "elkapede.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969146186573:android:a20fa64771c6421013d504",
+        "android_client_info": {
+          "package_name": "com.gph.elkadigiv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969146186573-d8fo7u7i4o742cqb8gv7mvpospckti4v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gph.elkadigiv2",
+            "certificate_hash": "e8f08f43be06c532e30a2f879b0a2edd761fcbf2"
+          }
+        },
+        {
+          "client_id": "969146186573-tnsolf28l4ls3o62o8mi1uuto45u7im0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQYU2GMVItTxtWggbVGPz3p3pbB-gfuqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969146186573-tnsolf28l4ls3o62o8mi1uuto45u7im0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "969146186573-386unr6et178qp3f9p92kbbl95t2q99q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gph.elkadigi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
