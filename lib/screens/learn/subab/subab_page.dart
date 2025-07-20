@@ -70,7 +70,7 @@ class _HalamanMapelState extends State<SubabPage> {
               ),
       backgroundColor: Helper.lightenColor(prov.color, 0.99),
       appBar: SubabAppabr(),
-      body: Container(margin: EdgeInsets.only(top: 16), child: SuabbTabar()),
+      body: Container( child: SuabbTabar()),
     );
   }
 }

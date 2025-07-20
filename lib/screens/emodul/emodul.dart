@@ -148,7 +148,7 @@ class _EmodulState extends State<Emodul> with SingleTickerProviderStateMixin {
                           padding: const EdgeInsets.all(8),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: 3 / 4.5,
+                                childAspectRatio: 3 /5.5,
                                 crossAxisCount: 3,
                                 crossAxisSpacing: 16,
                                 mainAxisSpacing: 20,
@@ -166,7 +166,7 @@ class _EmodulState extends State<Emodul> with SingleTickerProviderStateMixin {
                           padding: const EdgeInsets.all(8),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: 3 / 5,
+                                childAspectRatio: 3 / 5.5,
                                 crossAxisCount: 3,
                                 crossAxisSpacing: 16,
                                 mainAxisSpacing: 20,

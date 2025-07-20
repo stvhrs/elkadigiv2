@@ -30,56 +30,57 @@ class BookItem extends StatelessWidget {
         await Future.delayed(Duration(milliseconds: 180));
         _launchInBrowser(Uri.parse(e.pdfUrl));
       },
-      child: ShadowedContainer(
-        shadowColor: Theme.of(context).primaryColor,
-        padding: EdgeInsets.all(0),
-
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 6,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(8),
-                  topRight: Radius.circular(8),
-                ),
-                child: AspectRatio(
-                  aspectRatio: 3 / 3,
-                  child: CachedNetworkImage(
-                    imageUrl: e.imgUrl,
-                    fit: BoxFit.cover,
-
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) => ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
-                            "asset/place.png",
-                            fit: BoxFit.fitWidth,
-                          ),
-                        ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+      child: Stack(
+        children: [
+          ShadowedContainer(
+            shadowColor: Theme.of(context).primaryColor,
+            padding: EdgeInsets.all(0),
+          
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      topRight: Radius.circular(8),
+                    ),
+                    child:  CachedNetworkImage(
+                        imageUrl: e.imgUrl,
+                        fit: BoxFit.fitWidth,
+          
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) => ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                "asset/place.png",
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                    ),
+                  
+                
+          
+                Expanded(
+                  flex: 2,
+                  child: Center(
+                    child: Text(
+                      e.title,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color.fromRGBO(53, 53, 53, 1),
+          
+                        fontSize: 9,
+                        overflow: TextOverflow.clip,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                
+              ],
             ),
-
-            Expanded(
-              flex: 2,
-              child: Center(
-                child: Text(
-                  e.title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color.fromRGBO(53, 53, 53, 1),
-
-                    fontSize: 9,
-                    overflow: TextOverflow.clip,
-                  ),
-                ),
-              ),
-            ),
-            FirebaseAuth.instance.currentUser!.uid !=
+          ),FirebaseAuth.instance.currentUser!.uid !=
                     "0AdM3JnI6dUtdlti59uk2wfaHk83"
                 ? SizedBox()
                 : IconButton(
@@ -94,8 +95,7 @@ class BookItem extends StatelessWidget {
                   },
                   icon: Icon(Icons.edit, color: Colors.black),
                 ),
-          ],
-        ),
+        ],
       ),
     );
   }

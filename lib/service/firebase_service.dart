@@ -173,7 +173,43 @@ class FirebaseService {
       rethrow;
     }
   }
+Future<List<BankSoalpdf>> fetchBankSoalPdf({
+    required String kelasSubjectId,
+    bool forceRefresh = false,
+  }) async {
+    return await _fetchListWithCache<BankSoalpdf>(
+      cacheKey: 'bank_soal_pdf_$kelasSubjectId',
+      fetchFreshData: () => _fetchFromFirebase2(kelasSubjectId),
+      fromJson: BankSoalpdf.fromMap,
+      toMap: (item) => item.toMap(),
+      forceRefresh: forceRefresh,
+    );
+  }
 
+  // Direct Firebase fetch
+  Future<List<BankSoalpdf>> _fetchFromFirebase2(String kelasSubjectId) async {
+    try {
+      final snapshot = await FirebaseDatabase.instance
+          .ref('bank_soal_pdf')
+          .orderByChild('kelasSubjectId')
+          .equalTo(kelasSubjectId)
+          .get();
+
+      if (snapshot.exists) {
+        List<BankSoalpdf> list = [];
+        for (var element in snapshot.children) {
+          final data = element.value as Map<dynamic, dynamic>;
+          data['id'] = element.key; // Add the Firebase key as id
+          list.add(BankSoalpdf.fromMap(data));
+        }
+        return list;
+      }
+      return [];
+    } catch (e) {
+      log('Error fetching bank soal pdf from Firebase: $e');
+      rethrow;
+    }
+  }
   Future<T?> _fetchWithCache<T>({
     required String cacheKey,
     required Future<T?> Function() fetchFreshData,

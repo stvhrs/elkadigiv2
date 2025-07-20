@@ -1,3 +1,39 @@
+class BankSoalpdf {
+  final String id; // Add this
+  final String kelasSubjectId;
+  final String kelasId;
+  final String pdfUrl;
+  final String title;
+
+  BankSoalpdf({
+    this.id = '', // Add this with default empty string
+    required this.kelasSubjectId,
+    required this.kelasId,
+    required this.pdfUrl,
+    required this.title,
+  });
+
+  // Update fromMap to include id
+  factory BankSoalpdf.fromMap(Map<dynamic, dynamic> map) {
+    return BankSoalpdf(
+      id: map['id'] ?? '', // Add this
+      kelasSubjectId: map['kelasSubjectId'] ?? '',
+      kelasId: map['kelas_id'] ?? '',
+      pdfUrl: map['pdfUrl'] ?? '',
+      title: map['title'] ?? '',
+    );
+  }
+
+  // toMap doesn't need id as it's the Firebase key
+  Map<String, dynamic> toMap() {
+    return {
+      'kelasSubjectId': kelasSubjectId,
+      'kelas_id': kelasId,
+      'pdfUrl': pdfUrl,
+      'title': title,
+    };
+  }
+}
 class BankSoal {
   final String id; // Add this
   final String kelasSubjectId;

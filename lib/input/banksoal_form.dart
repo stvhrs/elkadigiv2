@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 class BankSoalManagementScreen extends StatefulWidget {
   final String kelasSubjectId;
-  final BankSoal? existingBankSoal; // Null for add, non-null for edit
+  final BankSoalpdf? existingBankSoal; // Null for add, non-null for edit
 
   const BankSoalManagementScreen({
     required this.kelasSubjectId,
@@ -33,7 +33,7 @@ class _BankSoalManagementScreenState extends State<BankSoalManagementScreen> {
       text: widget.existingBankSoal?.title ?? '',
     );
     _quizLinkController = TextEditingController(
-      text: widget.existingBankSoal?.quizLink ?? '',
+      text: widget.existingBankSoal?.pdfUrl ?? '',
     );
     _kelasIdController = TextEditingController(
       text: widget.existingBankSoal?.kelasId ?? '',

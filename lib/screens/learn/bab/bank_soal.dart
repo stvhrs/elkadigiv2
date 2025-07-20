@@ -1,7 +1,11 @@
+import 'package:elka/input/bank_soal_from_pdf.dart';
 import 'package:elka/input/banksoal_form.dart';
 import 'package:elka/model/bank_soal.dart';
+import 'package:elka/model/emodul_model.dart';
+import 'package:elka/model/user.dart';
 import 'package:elka/provider/navigation_provider.dart';
 import 'package:elka/screens/learn/subab/quiz_button.dart';
+import 'package:elka/screens/learn/subab/subab_pdf_detail.dart';
 import 'package:elka/screens/learn/subab/timeline.dart';
 import 'package:elka/service/firebase_service.dart';
 import 'package:elka/widgets/shadowBox.dart';
@@ -19,7 +23,7 @@ class BankSoalScreen extends StatefulWidget {
 
 class _BankSoalScreenState extends State<BankSoalScreen> {
   final FirebaseService _repository = FirebaseService();
-  List<BankSoal> _bankSoalFuture = [];
+  List<BankSoalpdf> _bankSoalFuture = [];
   bool _isRefreshing = false;
 
   @override
@@ -34,7 +38,7 @@ class _BankSoalScreenState extends State<BankSoalScreen> {
         "_" +
         context.read<NavigationProvider>().selectedSubject!.id;
     _isRefreshing = forceRefresh;
-    _bankSoalFuture = await _repository.fetchBankSoal(
+    _bankSoalFuture = await _repository.fetchBankSoalPdf(
       kelasSubjectId: prov,
       forceRefresh: forceRefresh,
     );
@@ -65,9 +69,8 @@ class _BankSoalScreenState extends State<BankSoalScreen> {
                     context,
                     MaterialPageRoute(
                       builder:
-                          (context) => BankSoalManagementScreen(
-                            kelasSubjectId: kelasSubjectid,
-                          ),
+                          (context) =>
+                              BankSoalFormPDF(kelasSubjectId: kelasSubjectid),
                     ),
                   );
                 },
@@ -90,42 +93,80 @@ class _BankSoalScreenState extends State<BankSoalScreen> {
           children:
               _bankSoalFuture
                   .mapIndexed(
-                    (e, i) => CustomTimelineTile(
-                      isFirstItem: e == 0,
-                      link: i.quizLink,
-                      content: ShadowedContainer(
-                        shadowColor: prov.color,
-                        child: Stack(
-                          children: [
-                            QuizButton(
-                              title: i.title,
-                              link: i.quizLink,
-                              color: prov.color,
-                            ),
-                            FirebaseAuth.instance.currentUser!.uid !=
-                                    "0AdM3JnI6dUtdlti59uk2wfaHk83"
-                                ? SizedBox()
-                                : IconButton(
-                                  icon: Icon(Icons.edit, color: Colors.green),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
+                    (e, i) =>
+                        (prov.currentUser!.userType == UserType.SISWA &&
+                                i.title.toLowerCase().contains("pembahasan"))
+                            ? SizedBox()
+                            : CustomTimelineTile(
+                              isFirstItem: e == 0,
+                              link: i.pdfUrl,
+                              content: ShadowedContainer(
+                                shadowColor: prov.color,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder:
-                                            (context) =>
-                                                BankSoalManagementScreen(
-                                                  kelasSubjectId:
-                                                      kelasSubjectid,
-                                                  existingBankSoal: i,
-                                                ),
+                                            (context) => SubabPdfDetail(
+                                              path: EmodulModel(
+                                                id: "id",
+                                                imgUrl: "",
+                                                pdfUrl: i.pdfUrl,
+                                                namaBuku: i.title,
+                                                kelasId: "",
+                                              ),
+                                            ),
                                       ),
                                     );
                                   },
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            width: 30,
+                                            i.title.toLowerCase().contains(
+                                                  "pembahasan",
+                                                )
+                                                ? "asset/formatif.png"
+                                                : "asset/sumatif.png",
+                                          ),
+                                          SizedBox(width: 15),
+                                          Text(i.title),
+                                        ],
+                                      ),
+                                      FirebaseAuth.instance.currentUser!.uid !=
+                                              "0AdM3JnI6dUtdlti59uk2wfaHk83"
+                                          ? SizedBox()
+                                          : IconButton(
+                                            icon: Icon(
+                                              Icons.edit,
+                                              color: Colors.green,
+                                            ),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder:
+                                                      (context) =>
+                                                          BankSoalFormPDF(
+                                                            kelasSubjectId:
+                                                                kelasSubjectid,
+                                                            bankSoalData:
+                                                                i.toMap(),
+                                                          ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                    ],
+                                  ),
                                 ),
-                          ],
-                        ),
-                      ),
-                    ),
+                              ),
+                            ),
                   )
                   .toList(),
         ),
