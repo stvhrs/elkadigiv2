@@ -1,4 +1,5 @@
 import 'package:elka/model/school.dart';
+import 'package:elka/model/user.dart';
 import 'package:elka/provider/navigation_provider.dart';
 import 'package:elka/registration.dart';
 import 'package:elka/screens/navigation.dart';
@@ -37,10 +38,23 @@ class _SignInPageState extends State<SignInPage> {
 
         if (school != null) {
           context.read<NavigationProvider>().setSelectedSchool(school);
-
+          FirebaseService().setUser(
+            UserData.fromJson({
+              "email":  FirebaseAuth.instance.currentUser!.email,
+              "id": "SJPA10120318835",
+              "jenjang": "SD",
+              "kelas_id": "kelas_6",
+              "kodekabupaten": "032000  ",
+              "name": FirebaseAuth.instance.currentUser!.displayName,
+              "npsn": "20318520",
+              "phone_number": "046464",
+              "usertype": "SISWA",
+            }),
+            FirebaseAuth.instance.currentUser!.uid,
+          );
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => Registration(path, _controller.text.trim()),
+              builder: (context) => Navigation(),
             ),
           );
           return;

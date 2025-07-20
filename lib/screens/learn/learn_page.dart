@@ -18,7 +18,7 @@ class LearnPage extends StatefulWidget {
 }
 
 class _LearnPageState extends State<LearnPage>
-    with AutomaticKeepAliveClientMixin {
+    {
   @override
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
@@ -40,7 +40,7 @@ class _LearnPageState extends State<LearnPage>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+    
     return Scaffold(
       appBar: CustomAppbar(),
       body: RefreshIndicator(
@@ -111,7 +111,5 @@ class _LearnPageState extends State<LearnPage>
     );
   }
 
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
+  
 }

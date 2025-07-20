@@ -15,7 +15,7 @@ class TryoutTka extends StatelessWidget {
   Widget build(BuildContext context) {
     log("build tka");
 
-    var snapshot = context.read<NavigationProvider>();
+    var snapshot = context.watch<NavigationProvider>();
     return Column(
       children:
           snapshot.bankSoal

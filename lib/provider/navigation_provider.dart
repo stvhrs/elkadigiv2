@@ -270,6 +270,7 @@ class NavigationProvider extends ChangeNotifier {
     _subjects = await FirebaseService().getSubjectsByKelasId(kelasId);
 
     _books = await FirebaseService().fetchBooks(kelasId);
+    _bankSoal=await FirebaseService().fetchTrout(jenjang: currentUser.jenjang.name);
     // _emoduls = await FirebaseService().fetchAllEmodulsByKelas(kelasId);
     log(kelasId);
     // loadBankSoal();

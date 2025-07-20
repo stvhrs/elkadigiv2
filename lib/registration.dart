@@ -59,8 +59,27 @@ class Registration extends StatefulWidget {
 class _LoginScreenState extends State<Registration> {
   late TextEditingController _nameController;
   late TextEditingController _phoneController;
-  late String? educationLevel;
+   String? educationLevel;
   String? grade;
+  bool _validateEducationFields() {
+    if (!widget.isEditMode) {
+      // Only validate these fields if NOT in edit mode
+      if (educationLevel == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Pilih jenjang pendidikan terlebih dahulu')),
+        );
+        return false;
+      }
+
+      if (grade == null) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Pilih kelas terlebih dahulu')));
+        return false;
+      }
+    }
+    return true;
+  }
 
   final List<String> educationLevels = ["SD", "SMP", 'SMA'];
   List<String> grades = [];
@@ -154,6 +173,7 @@ class _LoginScreenState extends State<Registration> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Form(
+         
           key: _formKey,
           child: ListView(
             children: [
@@ -274,7 +294,8 @@ class _LoginScreenState extends State<Registration> {
                             ),
                             hintText: 'Pilih Jenjang',
                             validator: (value) {
-                              if (grade == null) return null;
+                              if (educationLevel == null) return "Silahkan Pilih";
+                                if (grade == null ) return null;
                               if (value.toString() == "SD" &&
                                   ![
                                     "1",
@@ -326,6 +347,9 @@ class _LoginScreenState extends State<Registration> {
                             hideSelectedFieldWhenExpanded: true,
                             items: grades,
                             excludeSelected: false,
+                            validator: (p0) {
+                              if (grade == null) return "Silahkan Pilih";
+                            },
                             onChanged: (value) {
                               setGrade(value!);
                               _formKey.currentState!.validate();
@@ -344,8 +368,9 @@ class _LoginScreenState extends State<Registration> {
                 margin: EdgeInsets.only(top: 24),
                 child: ButtonLoading(
                   () async {
+                    _formKey.currentState!.validate();
                     if (!_formKey.currentState!.validate()) return;
-
+                    if (grade == null || educationLevel == null) return;
                     final userData = UserData(
                       id: widget.code,
                       email: FirebaseAuth.instance.currentUser!.email!,
