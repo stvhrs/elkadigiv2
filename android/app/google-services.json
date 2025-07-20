@@ -15,11 +15,27 @@
       },
       "oauth_client": [
         {
-          "client_id": "969146186573-d8fo7u7i4o742cqb8gv7mvpospckti4v.apps.googleusercontent.com",
+          "client_id": "969146186573-7tjsq6j0l7vhsahq7931aie71ijvqpiu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gph.elkadigiv2",
-            "certificate_hash": "e8f08f43be06c532e30a2f879b0a2edd761fcbf2"
+            "certificate_hash": "a8fc31d5ccf9ea99744078d9fb19dab278af01fe"
+          }
+        },
+        {
+          "client_id": "969146186573-ieem5lsaultkakss5986l2t3p52n63fb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gph.elkadigiv2",
+            "certificate_hash": "7fcb731e1c4f45d029a7600b11b05ac32df1fa05"
+          }
+        },
+        {
+          "client_id": "969146186573-opmcm9pbpfsgdvabljq2odbrvn6gbu58.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gph.elkadigiv2",
+            "certificate_hash": "b03edcda9e9b35242f3f855d6b3785a7c672178d"
           }
         },
         {
