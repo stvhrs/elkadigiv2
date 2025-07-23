@@ -77,7 +77,7 @@ class _BankSoalScreenState extends State<BankSoalScreen> {
               ),
       appBar: AppBar(
         backgroundColor: prov.color,
-        title:  Text( context.read<NavigationProvider>().selectedSubject!.name),
+        title:  Text(context.read<NavigationProvider>().selectedSubject!.name),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -88,88 +88,102 @@ class _BankSoalScreenState extends State<BankSoalScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: _refreshData,
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-          children:
-              _bankSoalFuture
-                  .mapIndexed(
-                    (e, i) =>
-                        (prov.currentUser!.userType == UserType.SISWA &&
-                                i.title.toLowerCase().contains("pembahasan"))
-                            ? SizedBox()
-                            : CustomTimelineTile(
-                              isFirstItem: e == 0,
-                              link: i.pdfUrl,
-                              content: ShadowedContainer(
-                                shadowColor: prov.color,
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder:
-                                            (context) => SubabPdfDetail(
-                                              path: EmodulModel(
-                                                id: "id",
-                                                imgUrl: "",
-                                                pdfUrl: i.pdfUrl,
-                                                namaBuku: i.title,
-                                                kelasId: "",
-                                              ),
+        child: _bankSoalFuture.isEmpty
+            ? Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    'Nantikan Materi dari Elkadigi',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
+            : ListView(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                children:
+                    _bankSoalFuture
+                        .mapIndexed(
+                          (i, e) =>
+                              (prov.currentUser!.userType == UserType.SISWA &&
+                                      e.title.toLowerCase().contains("pembahasan"))
+                                  ? SizedBox()
+                                  : CustomTimelineTile(
+                                    isFirstItem: i == 0,
+                                    link: e.pdfUrl,
+                                    content: ShadowedContainer(
+                                      shadowColor: prov.color,
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (context) => SubabPdfDetail(
+                                                    path: EmodulModel(
+                                                      id: "id",
+                                                      imgUrl: "",
+                                                      pdfUrl: e.pdfUrl,
+                                                      namaBuku: e.title,
+                                                      kelasId: "",
+                                                    ),
+                                                  ),
                                             ),
-                                      ),
-                                    );
-                                  },
-                                  child: Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            width: 30,
-                                            i.title.toLowerCase().contains(
-                                                  "pembahasan",
-                                                )
-                                                ? "asset/formatif.png"
-                                                : "asset/sumatif.png",
-                                          ),
-                                          SizedBox(width: 15),
-                                          Text(i.title),
-                                        ],
-                                      ),
-                                      FirebaseAuth.instance.currentUser!.uid !=
-                                              "0AdM3JnI6dUtdlti59uk2wfaHk83"
-                                          ? SizedBox()
-                                          : IconButton(
-                                            icon: Icon(
-                                              Icons.edit,
-                                              color: Colors.green,
-                                            ),
-                                            onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder:
-                                                      (context) =>
-                                                          BankSoalFormPDF(
-                                                            kelasSubjectId:
-                                                                kelasSubjectid,
-                                                            bankSoalData:
-                                                                i.toMap(),
-                                                          ),
+                                          );
+                                        },
+                                        child: Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Image.asset(
+                                                  width: 30,
+                                                  e.title.toLowerCase().contains(
+                                                        "pembahasan",
+                                                      )
+                                                      ? "asset/formatif.png"
+                                                      : "asset/sumatif.png",
                                                 ),
-                                              );
-                                            },
-                                          ),
-                                    ],
+                                                SizedBox(width: 15),
+                                                Text(e.title),
+                                              ],
+                                            ),
+                                            FirebaseAuth.instance.currentUser!.uid !=
+                                                    "0AdM3JnI6dUtdlti59uk2wfaHk83"
+                                                ? SizedBox()
+                                                : IconButton(
+                                                  icon: Icon(
+                                                    Icons.edit,
+                                                    color: Colors.green,
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder:
+                                                            (context) =>
+                                                                BankSoalFormPDF(
+                                                                  kelasSubjectId:
+                                                                      kelasSubjectid,
+                                                                  bankSoalData:
+                                                                      e.toMap(),
+                                                                ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
-                  )
-                  .toList(),
-        ),
+                        )
+                        .toList(),
+              ),
       ),
     );
   }
