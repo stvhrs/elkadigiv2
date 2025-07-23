@@ -77,7 +77,7 @@ class _BankSoalScreenState extends State<BankSoalScreen> {
               ),
       appBar: AppBar(
         backgroundColor: prov.color,
-        title: const Text('Bank Soal IPA Kelas 7'),
+        title:  Text( context.read<NavigationProvider>().selectedSubject!.name),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
