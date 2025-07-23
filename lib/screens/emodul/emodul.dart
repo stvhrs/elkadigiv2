@@ -142,42 +142,70 @@ class _EmodulState extends State<Emodul> with SingleTickerProviderStateMixin {
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    Consumer<NavigationProvider>(
-                      builder: (context, snapshot, _) {
-                        return GridView.builder(
-                          padding: const EdgeInsets.all(8),
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: 3 /5.5,
-                                crossAxisCount: 3,
-                                crossAxisSpacing: 16,
-                                mainAxisSpacing: 20,
-                              ),
-                          itemCount: snapshot.books.length ?? 0,
-                          itemBuilder: (context, index) {
-                            return BookItem(snapshot.books![index]);
-                          },
-                        );
-                      },
-                    ),
-                    Consumer<NavigationProvider>(
-                      builder: (context, snapshot, _) {
-                        return GridView.builder(
-                          padding: const EdgeInsets.all(8),
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: 3 / 5.5,
-                                crossAxisCount: 3,
-                                crossAxisSpacing: 16,
-                                mainAxisSpacing: 20,
-                              ),
-                          itemCount: snapshot.booksUniversal.length ?? 0,
-                          itemBuilder: (context, index) {
-                            return BookItem(snapshot.booksUniversal![index]);
-                          },
-                        );
-                      },
-                    ),
+                   Consumer<NavigationProvider>(
+  builder: (context, snapshot, _) {
+    if (snapshot.books == null || snapshot.books!.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            'Nantikan konten dari Elkadigi',
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+    return GridView.builder(
+      padding: const EdgeInsets.all(8),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        childAspectRatio: 3 / 5.5,
+        crossAxisCount: 3,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 20,
+      ),
+      itemCount: snapshot.books!.length,
+      itemBuilder: (context, index) {
+        return BookItem(snapshot.books![index]);
+      },
+    );
+  },
+),
+Consumer<NavigationProvider>(
+  builder: (context, snapshot, _) {
+    if (snapshot.booksUniversal == null || snapshot.booksUniversal!.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            'Nantikan konten dari Elkadigi',
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+    return GridView.builder(
+      padding: const EdgeInsets.all(8),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        childAspectRatio: 3 / 5.5,
+        crossAxisCount: 3,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 20,
+      ),
+      itemCount: snapshot.booksUniversal!.length,
+      itemBuilder: (context, index) {
+        return BookItem(snapshot.booksUniversal![index]);
+      },
+    );
+  },
+),
                   ],
                 ),
               ),
