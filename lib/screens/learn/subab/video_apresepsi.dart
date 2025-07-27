@@ -26,7 +26,7 @@ class VideoApresepsi extends StatelessWidget {
               MaterialPageRoute(
                 builder:
                     (context) =>
-                        VideoPage(prov.babs[index].youtubeIntroduction),
+                        VideoPage(  prov.selectedBab!.youtubeIntroduction),
               ),
             );
           },
@@ -68,7 +68,7 @@ class VideoApresepsi extends StatelessWidget {
                             child: CachedNetworkImage(
                               height: 30,
                               imageUrl: getThumbnail(
-                                prov.babs[index].youtubeIntroduction,
+                                prov.selectedBab!.youtubeIntroduction,
                               ),
                               fit: BoxFit.cover,
                             ),
@@ -93,7 +93,7 @@ class VideoApresepsi extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    prov.babs[index].youtubeIntroductionTitle,
+                                      prov.selectedBab!.youtubeIntroductionTitle,
 
                                     maxLines: 3,
                                     softWrap: true,

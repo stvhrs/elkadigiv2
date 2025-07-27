@@ -61,318 +61,291 @@ class _SuabbTabarState extends State<SuabbTabar> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Container(
-                  margin: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children:
-                        prov.subabs
-                            .mapIndexed(
-                              (index, e) => Container(
-                                margin: EdgeInsets.only(top: 0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    index == 0
-                                        ? CustomTimelineTile(
-                                          link: prov.selectedBab!.summaryPdfUrl,
-                                          content: ShadowedContainer(
-                                            child: InkWell(
-                                              onTap: () {
-                                                Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                    builder:
-                                                        (
-                                                          context,
-                                                        ) => SubabPdfDetail(
-                                                          path: EmodulModel(
-                                                            id: "id",
-                                                            imgUrl: "",
-                                                            pdfUrl:
-                                                                prov
-                                                                    .selectedBab!
-                                                                    .summaryPdfUrl,
-                                                            namaBuku:
-                                                                "E-Modul "+prov.selectedSubject!.name,
-                                                            kelasId: "kelasId",
-                                                          ),
-                                                        ),
-                                                  ),
-                                                );
-                                              },
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          4,
-                                                        ),
-                                                    child: CachedNetworkImage(
-                                                      imageUrl:
-                                                          prov
-                                                              .selectedSubject!
-                                                              .imageUrl,
-                                                      width:
-                                                          MediaQuery.of(
-                                                            context,
-                                                          ).size.width *
-                                                          0.09,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    "      E-Modul " +
-                                                        prov
-                                                            .selectedSubject!
-                                                            .name
-                                                            .toString(),
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Color.fromRGBO(
-                                                        53,
-                                                        53,
-                                                        53,
-                                                        1,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                        : SizedBox(),
-                                    // index == 0
-                                    //     ? CustomTimelineTile(
-                                    //       link:
-                                    //           prov.selectedBab!.diagnosticQuiz,
-                                    //       content: ShadowedContainer(
-                                    //         shadowColor: prov.color!,
-                                    //         child: DiagnosticButton(
-                                    //           title: "Tes Diagnostik",
-                                    //           link:
-                                    //               prov
-                                    //                   .selectedBab!
-                                    //                   .diagnosticQuiz,
-                                    //         ),
-                                    //       ),
-                                    //     )
-                                    //     : SizedBox(),
-
-                                    index == 0
-                                        ? CustomTimelineTile(
-                                          link:
-                                              prov
-                                                  .selectedBab!
-                                                  .youtubeIntroduction,
-                                          content: InkWell(
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                  builder:
-                                                      (context) => VideoPage(
-                                                        prov
-                                                            .selectedBab!
-                                                            .youtubeIntroduction,
-                                                      ),
-                                                ),
-                                              );
-                                            },
-                                            child: VideoApresepsi(index),
-                                          ),
-                                        )
-                                        : SizedBox(),
-
-                                    CustomTimelineTile(
-                                      link: prov.subabs[index].ytLinkMaterial,
-                                      content: Stack(
-                                        children: [
-                                          VideoItem(index, true),
-                                          // prov.scoreDiagnostic > 75
-                                          //     ? SizedBox()
-                                          //     : Positioned.fill(
-                                          //       child: Container(
-                                          //         decoration: BoxDecoration(
-                                          //           color: Colors.black
-                                          //               .withOpacity(0.6),
-                                          //           borderRadius:
-                                          //               BorderRadius.circular(
-                                          //                 8,
-                                          //               ),
-                                          //         ),
-                                          //         child: Center(
-                                          //           child: Icon(
-                                          //             Icons.lock,
-                                          //             color: Colors.white,
-                                          //             size: 16,
-                                          //           ),
-                                          //         ),
-                                          //       ),
-                                          //     ),
-                                          FirebaseAuth
-                                                      .instance
-                                                      .currentUser!
-                                                      .uid !=
-                                                  "0AdM3JnI6dUtdlti59uk2wfaHk83"
-                                              ? SizedBox()
-                                              : IconButton(
-                                                onPressed: () {
+                if (prov.subabs.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'Nantikan Materi dari Elkadigi',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                else
+                  Container(
+                    margin: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children:
+                          prov.subabs
+                              .mapIndexed(
+                                (index, e) => Container(
+                                  margin: EdgeInsets.only(top: 0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      index == 0
+                                          ? CustomTimelineTile(
+                                            link: prov.selectedBab!.summaryPdfUrl,
+                                            content: ShadowedContainer(
+                                              child: InkWell(
+                                                onTap: () {
                                                   Navigator.of(context).push(
                                                     MaterialPageRoute(
                                                       builder:
                                                           (
                                                             context,
-                                                          ) => SubabForm(
-                                                            order: index + 1,
-                                                            subabId:
-                                                                prov
-                                                                    .subabs[index]
-                                                                    .id,
-                                                            subabData:
-                                                                prov.subabs[index]
-                                                                    .toMap(),
+                                                          ) => SubabPdfDetail(
+                                                            path: EmodulModel(
+                                                              id: "id",
+                                                              imgUrl: "",
+                                                              pdfUrl:
+                                                                  prov
+                                                                      .selectedBab!
+                                                                      .summaryPdfUrl,
+                                                              namaBuku:
+                                                                  "E-Modul "+ prov.selectedSubject!.name,
+                                                              kelasId: "kelasId",
+                                                            ),
                                                           ),
                                                     ),
                                                   );
                                                 },
-                                                icon: Icon(
-                                                  Icons.edit,
-                                                  color: Colors.white,
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            4,
+                                                          ),
+                                                      child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            prov
+                                                                .selectedSubject!
+                                                                .imageUrl,
+                                                        width:
+                                                            MediaQuery.of(
+                                                              context,
+                                                            ).size.width *
+                                                            0.09,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "      E-Modul " +
+                                                          prov
+                                                              .selectedSubject!
+                                                              .name
+                                                              .toString(),
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Color.fromRGBO(
+                                                          53,
+                                                          53,
+                                                          53,
+                                                          1,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                        ],
-                                      ),
-                                    ),
+                                            ),
+                                          )
+                                          : SizedBox(),
+                                      // index == 0
+                                      //     ? CustomTimelineTile(
+                                      //       link:
+                                      //           prov.selectedBab!.diagnosticQuiz,
+                                      //       content: ShadowedContainer(
+                                      //         shadowColor: prov.color!,
+                                      //         child: DiagnosticButton(
+                                      //           title: "Tes Diagnostik",
+                                      //           link:
+                                      //               prov
+                                      //                   .selectedBab!
+                                      //                   .diagnosticQuiz,
+                                      //         ),
+                                      //       ),
+                                      //     )
+                                      //     : SizedBox(),
 
-                                    prov.subabs[0].ytLinkExercise.isEmpty
-                                        ? SizedBox()
-                                        : CustomTimelineTile(
-                                          link:
-                                              prov.subabs[index].ytLinkExercise,
-                                          content: Stack(
-                                            children: [
-                                              VideoItem(index, false),
-                                              // prov.scoreDiagnostic > 75
-                                              //     ? SizedBox()
-                                              //     : Positioned.fill(
-                                              //       child: Container(
-                                              //         child: Center(
-                                              //           child: Icon(
-                                              //             Icons.lock,
-                                              //             color: Colors.white,
-                                              //             size: 16,
-                                              //           ),
-                                              //         ),
-                                              //         decoration: BoxDecoration(
-                                              //           color: Colors.black
-                                              //               .withOpacity(0.6),
-                                              //           borderRadius:
-                                              //               BorderRadius.circular(
-                                              //                 8,
-                                              //               ),
-                                              //         ),
-                                              //       ),
-                                              //     ),
-                                            ],
-                                          ),
+                                      index == 0
+                                          ? CustomTimelineTile(
+                                            link:
+                                                prov
+                                                    .selectedBab!
+                                                    .youtubeIntroduction,
+                                            content: InkWell(
+                                              onTap: () {
+                                                Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                    builder:
+                                                        (context) => VideoPage(
+                                                          prov
+                                                              .selectedBab!
+                                                              .youtubeIntroduction,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              child: VideoApresepsi(index),
+                                            ),
+                                          )
+                                          : SizedBox(),
+
+                                      CustomTimelineTile(
+                                        link: prov.subabs[index].ytLinkMaterial,
+                                        content: Stack(
+                                          children: [
+                                            VideoItem(index, true),
+                                            // prov.scoreDiagnostic > 75
+                                            //     ? SizedBox()
+                                            //     : Positioned.fill(
+                                            //       child: Container(
+                                            //         decoration: BoxDecoration(
+                                            //           color: Colors.black
+                                            //               .withOpacity(0.6),
+                                            //           borderRadius:
+                                            //               BorderRadius.circular(
+                                            //                 8,
+                                            //               ),
+                                            //         ),
+                                            //         child: Center(
+                                            //           child: Icon(
+                                            //             Icons.lock,
+                                            //             color: Colors.white,
+                                            //             size: 16,
+                                            //           ),
+                                            //         ),
+                                            //       ),
+                                            //     ),
+                                            FirebaseAuth
+                                                        .instance
+                                                        .currentUser!
+                                                        .uid !=
+                                                    "0AdM3JnI6dUtdlti59uk2wfaHk83"
+                                                ? SizedBox()
+                                                : IconButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                        builder:
+                                                            (
+                                                              context,
+                                                            ) => SubabForm(
+                                                              order: index + 1,
+                                                              subabId:
+                                                                  prov
+                                                                      .subabs[index]
+                                                                      .id,
+                                                              subabData:
+                                                                  prov.subabs[index]
+                                                                      .toMap(),
+                                                            ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.edit,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                          ],
                                         ),
-                                    // index + 1 == prov.subabs.length
-                                    //     ? Container(
-                                    //       child: CustomTimelineTile(
-                                    //         isLast: true,
-                                    //         link:
-                                    //             prov.selectedBab!.summativeQuiz,
-                                    //         content: Stack(
-                                    //           children: [
-                                    //             ShadowedContainer(
-                                    //               shadowColor: prov.color!,
-                                    //               child: QuizButton(
-                                    //                 title: "Assemen Sumatif",
-                                    //                 color: prov.color,
-                                    //                 link:
-                                    //                     prov
-                                    //                         .selectedBab!
-                                    //                         .summativeQuiz,
-                                    //               ),
-                                    //             ),
-                                    //             prov.scoreDiagnostic > 75
-                                    //                 ? SizedBox()
-                                    //                 : Positioned.fill(
-                                    //                   child: Container(
-                                    //                     child: Center(
-                                    //                       child: Icon(
-                                    //                         Icons.lock,
-                                    //                         color: Colors.white,
-                                    //                         size: 16,
-                                    //                       ),
-                                    //                     ),
-                                    //                     decoration: BoxDecoration(
-                                    //                       color: Colors.black
-                                    //                           .withOpacity(0.6),
-                                    //                       borderRadius:
-                                    //                           BorderRadius.circular(
-                                    //                             8,
-                                    //                           ),
-                                    //                     ),
-                                    //                   ),
-                                    //                 ),
-                                    //           ],
-                                    //         ),
-                                    //       ),
-                                    //     )
-                                    //     : SizedBox(),
-                                  ],
+                                      ),
+
+                                      prov.subabs[0].ytLinkExercise.isEmpty
+                                          ? SizedBox()
+                                          : CustomTimelineTile(
+                                            link:
+                                                prov.subabs[index].ytLinkExercise,
+                                            content: Stack(
+                                              children: [
+                                                VideoItem(index, false),
+                                                // prov.scoreDiagnostic > 75
+                                                //     ? SizedBox()
+                                                //     : Positioned.fill(
+                                                //       child: Container(
+                                                //         child: Center(
+                                                //           child: Icon(
+                                                //             Icons.lock,
+                                                //             color: Colors.white,
+                                                //             size: 16,
+                                                //           ),
+                                                //         ),
+                                                //         decoration: BoxDecoration(
+                                                //           color: Colors.black
+                                                //               .withOpacity(0.6),
+                                                //           borderRadius:
+                                                //               BorderRadius.circular(
+                                                //                 8,
+                                                //               ),
+                                                //         ),
+                                                //       ),
+                                                //     ),
+                                              ],
+                                            ),
+                                          ),
+                                      // index + 1 == prov.subabs.length
+                                      //     ? Container(
+                                      //       child: CustomTimelineTile(
+                                      //         isLast: true,
+                                      //         link:
+                                      //             prov.selectedBab!.summativeQuiz,
+                                      //         content: Stack(
+                                      //           children: [
+                                      //             ShadowedContainer(
+                                      //               shadowColor: prov.color!,
+                                      //               child: QuizButton(
+                                      //                 title: "Assemen Sumatif",
+                                      //                 color: prov.color,
+                                      //                 link:
+                                      //                     prov
+                                      //                         .selectedBab!
+                                      //                         .summativeQuiz,
+                                      //               ),
+                                      //             ),
+                                      //             prov.scoreDiagnostic > 75
+                                      //                 ? SizedBox()
+                                      //                 : Positioned.fill(
+                                      //                   child: Container(
+                                      //                     child: Center(
+                                      //                       child: Icon(
+                                      //                         Icons.lock,
+                                      //                         color: Colors.white,
+                                      //                         size: 16,
+                                      //                       ),
+                                      //                     ),
+                                      //                     decoration: BoxDecoration(
+                                      //                       color: Colors.black
+                                      //                           .withOpacity(0.6),
+                                      //                       borderRadius:
+                                      //                           BorderRadius.circular(
+                                      //                             8,
+                                      //                           ),
+                                      //                     ),
+                                      //                   ),
+                                      //                 ),
+                                      //           ],
+                                      //         ),
+                                      //       ),
+                                      //     )
+                                      //     : SizedBox(),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            )
-                            .toList(),
+                              )
+                              .toList(),
+                    ),
                   ),
-                ),
               ],
             ),
           ),
-
-          // Container(
-          //   margin: const EdgeInsets.all(16.0),
-          //   child: Column(
-          //     children:
-          //         prov.subabs
-          //             .mapIndexed(
-          //               (index, element) => CustomTimelineTile(
-          //                 isLast: index == prov.subabs.length - 1,
-          //                 link: element.pdfUrl,
-          //                 content: InkWell(
-          //                   onTap: () {
-          //                     Navigator.of(context).push(
-          //                       MaterialPageRoute(
-          //                         builder:
-          //                             (context) => SubabPdfDetail(
-          //                               path: EmodulModel(
-          //                                 id: element.id,
-          //                                 imgUrl: "",
-          //                                 kelasId:
-          //                                     prov.currentUser!.kelasId,
-          //                                 namaBuku: element.title,
-          //                                 pdfUrl: element.pdfUrl,
-          //                               ),
-          //                             ),
-          //                       ),
-          //                     );
-          //                   },
-          //                   child: ShadowedContainer(
-          //                     child: SubabPdf(
-          //                       subject: element.title,
-          //                       color: prov.color,
-          //                     ),
-          //                   ),
-          //                 ),
-          //               ),
-          //             )
-          //             .toList(),
-          //   ),
-          // ),
         ),
       ],
     );

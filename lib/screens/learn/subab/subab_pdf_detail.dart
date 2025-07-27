@@ -406,14 +406,7 @@ class _SubabPdfDetailState extends State<SubabPdfDetail>
       );
     }
 
-    return RefreshIndicator(
-      key: _refreshIndicatorKey,
-      onRefresh: _refreshPdf,
-      child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: SfPdfViewerTheme(
+    return SfPdfViewerTheme(
             data: SfPdfViewerThemeData(
               progressBarColor: context.read<NavigationProvider>().color,
               scrollHeadStyle: PdfScrollHeadStyle(
@@ -445,9 +438,7 @@ class _SubabPdfDetailState extends State<SubabPdfDetail>
                     },
                     controller: _pdfController,
                   ),
-          ),
-        ),
-      ),
+      
     );
   }
 }
