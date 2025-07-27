@@ -92,7 +92,7 @@ class _SuabbTabarState extends State<SuabbTabar> {
                                                                     .selectedBab!
                                                                     .summaryPdfUrl,
                                                             namaBuku:
-                                                                "Rangkuman ${prov.selectedBab!.title}",
+                                                                "E-Modul "+prov.selectedSubject!.name,
                                                             kelasId: "kelasId",
                                                           ),
                                                         ),

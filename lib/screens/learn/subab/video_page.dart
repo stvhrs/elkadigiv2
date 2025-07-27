@@ -111,7 +111,7 @@ class VideoPageState extends State<VideoPage> {
               ? Center(child: CircularProgressIndicator(color: prov.color))
               : YoutubePlayerScaffold(
                 autoFullScreen: true,
-                backgroundColor: Colors.black,
+                backgroundColor: Colors.white,
                 enableFullScreenOnVerticalDrag: false,
                 // Changed from YoutubePlayerControllerProvider
                 controller: _controller,
@@ -122,35 +122,17 @@ class VideoPageState extends State<VideoPage> {
                   //   auto = false;
                   //   log(" fullsceen");
                   // }
-                  return Scaffold(
-                    backgroundColor: Colors.transparent,
-                    body: Stack(
-                      children: [
-                        SafeArea(
-                          child: Positioned.fill(
-                            child: Container(color: Colors.white),
-                          ),
-                        ),
+                  return Scaffold(appBar: AppBar(),
+                    backgroundColor: Colors.white,
+                    body:
                         ListView(
                           children: [
-                            Stack(
-                              children: [
-                                Positioned.fill(
-                                  child: Container(
-                                    color: Colors.black,
-                                    child: Center(
-                                      child: CircularProgressIndicator(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                           
                                 AspectRatio(
                                   aspectRatio: _aspectRatio,
                                   child: player,
                                 ),
-                              ],
-                            ),
+                             
 
                             if (!widget.link.contains("shorts"))
                               Container(
@@ -198,8 +180,7 @@ class VideoPageState extends State<VideoPage> {
                               ),
                           ],
                         ),
-                      ],
-                    ),
+                    
                   );
                 },
               ),
