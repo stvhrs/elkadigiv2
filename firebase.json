@@ -1,1 +1,16 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"elkapede","appId":"1:969146186573:android:b278c05afbf8f8ba13d504","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"elkapede","configurations":{"android":"1:969146186573:android:b278c05afbf8f8ba13d504","ios":"1:969146186573:ios:e779240ab38bd3a213d504","web":"1:969146186573:web:ec3ac0b16b54635313d504"}}}}}}
+{
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
