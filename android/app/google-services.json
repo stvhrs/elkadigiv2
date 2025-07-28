@@ -8,34 +8,34 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:969146186573:android:a20fa64771c6421013d504",
+        "mobilesdk_app_id": "1:969146186573:android:b278c05afbf8f8ba13d504",
         "android_client_info": {
-          "package_name": "com.gph.elkadigiv2"
+          "package_name": "com.elkapede.elkadigi"
         }
       },
       "oauth_client": [
         {
-          "client_id": "969146186573-7tjsq6j0l7vhsahq7931aie71ijvqpiu.apps.googleusercontent.com",
+          "client_id": "969146186573-2didme4rte70ium21i10vaaeshgscukb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.gph.elkadigiv2",
+            "package_name": "com.elkapede.elkadigi",
             "certificate_hash": "a8fc31d5ccf9ea99744078d9fb19dab278af01fe"
           }
         },
         {
-          "client_id": "969146186573-ieem5lsaultkakss5986l2t3p52n63fb.apps.googleusercontent.com",
+          "client_id": "969146186573-382155ehaqbckm3hegt9hbe79288tbfs.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.gph.elkadigiv2",
-            "certificate_hash": "7fcb731e1c4f45d029a7600b11b05ac32df1fa05"
+            "package_name": "com.elkapede.elkadigi",
+            "certificate_hash": "b42b96ac475d6b30e97c010fc424bf0f407f3626"
           }
         },
         {
-          "client_id": "969146186573-opmcm9pbpfsgdvabljq2odbrvn6gbu58.apps.googleusercontent.com",
+          "client_id": "969146186573-e8ks0rprpa7d29q6lavt323bc60bup5c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.gph.elkadigiv2",
-            "certificate_hash": "b03edcda9e9b35242f3f855d6b3785a7c672178d"
+            "package_name": "com.elkapede.elkadigi",
+            "certificate_hash": "7fcb731e1c4f45d029a7600b11b05ac32df1fa05"
           }
         },
         {

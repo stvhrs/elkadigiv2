@@ -1,4 +1,4 @@
-package com.gph.elkadigiv2
+package com.elkapede.elkadigi
 
 import io.flutter.embedding.android.FlutterActivity
 
