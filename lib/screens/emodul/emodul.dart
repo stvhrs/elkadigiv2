@@ -76,19 +76,24 @@ class _EmodulState extends State<Emodul> with SingleTickerProviderStateMixin {
                   ).push(MaterialPageRoute(builder: (context) => BookForm()));
                 },
               ),
-      appBar: CustomAppbar(),
+
       body: RefreshIndicator(
         key: _refreshIndicatorKey,
         onRefresh: () async => await _init(true),
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  const SizedBox(height: 10),
-                  BannerSlider(),
-                  const SizedBox(height: 20),
-                ],
+              child: Container(
+                padding: const EdgeInsets.only(left: 8, bottom: 16, top: 24),
+
+                child: Text(
+                  "E-Library",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Color.fromARGB(255, 75, 75, 75),
+                  ),
+                ),
               ),
             ),
             SliverToBoxAdapter(
@@ -136,76 +141,81 @@ class _EmodulState extends State<Emodul> with SingleTickerProviderStateMixin {
               ),
             ),
 
-            SliverFillRemaining(fillOverscroll: true,hasScrollBody: true,
+            SliverFillRemaining(
+              fillOverscroll: true,
+              hasScrollBody: true,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                   Consumer<NavigationProvider>(
-  builder: (context, snapshot, _) {
-    if (snapshot.books == null || snapshot.books!.isEmpty) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            'Nantikan konten dari Elkadigi',
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.grey,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      );
-    }
-    return GridView.builder(
-      padding: const EdgeInsets.all(8),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        childAspectRatio: 3 / 5.5,
-        crossAxisCount: 3,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 20,
-      ),
-      itemCount: snapshot.books!.length,
-      itemBuilder: (context, index) {
-        return BookItem(snapshot.books![index]);
-      },
-    );
-  },
-),
-Consumer<NavigationProvider>(
-  builder: (context, snapshot, _) {
-    if (snapshot.booksUniversal == null || snapshot.booksUniversal!.isEmpty) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            'Nantikan konten dari Elkadigi',
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.grey,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      );
-    }
-    return GridView.builder(
-      padding: const EdgeInsets.all(8),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        childAspectRatio: 3 / 5.5,
-        crossAxisCount: 3,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 20,
-      ),
-      itemCount: snapshot.booksUniversal!.length,
-      itemBuilder: (context, index) {
-        return BookItem(snapshot.booksUniversal![index]);
-      },
-    );
-  },
-),
+                    Consumer<NavigationProvider>(
+                      builder: (context, snapshot, _) {
+                        if (snapshot.books == null || snapshot.books!.isEmpty) {
+                          return Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                'Nantikan konten dari Elkadigi',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          );
+                        }
+                        return GridView.builder(
+                          padding: const EdgeInsets.all(8),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                childAspectRatio: 3 / 5.5,
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 16,
+                                mainAxisSpacing: 20,
+                              ),
+                          itemCount: snapshot.books!.length,
+                          itemBuilder: (context, index) {
+                            return BookItem(snapshot.books![index]);
+                          },
+                        );
+                      },
+                    ),
+                    Consumer<NavigationProvider>(
+                      builder: (context, snapshot, _) {
+                        if (snapshot.booksUniversal == null ||
+                            snapshot.booksUniversal!.isEmpty) {
+                          return Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                'Nantikan konten dari Elkadigi',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          );
+                        }
+                        return GridView.builder(
+                          padding: const EdgeInsets.all(8),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                childAspectRatio: 3 / 5.5,
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 16,
+                                mainAxisSpacing: 20,
+                              ),
+                          itemCount: snapshot.booksUniversal!.length,
+                          itemBuilder: (context, index) {
+                            return BookItem(snapshot.booksUniversal![index]);
+                          },
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),

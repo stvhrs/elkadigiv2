@@ -129,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
           },
           child: Icon(
             Icons.arrow_back_rounded,
-            color: Color.fromARGB(255, 75, 75, 75),
+            color: Colors.white
           ),
         ),
         centerTitle: true,
@@ -139,7 +139,7 @@ class ProfileScreen extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
-            color: Color.fromARGB(255, 75, 75, 75),
+            color: Colors.white
           ),
         ),
       ),

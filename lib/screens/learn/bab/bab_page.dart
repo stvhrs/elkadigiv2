@@ -86,8 +86,10 @@ class _HalamanMapelState extends State<SubjectPage> {
                   children: [
                     Row(
                       children: [
-                        Expanded(
-                          child: ShadowedContainer(
+                        Container(
+                              height: MediaQuery.of(context).size.width * 0.05,
+                              
+                          child:ShadowedContainer(
                             shadowColor: prov.color,
                             child: InkWell(
                               onTap: () {
@@ -103,12 +105,12 @@ class _HalamanMapelState extends State<SubjectPage> {
                                   children: [
                                     Image.asset(
                                       "asset/sumatif.png",
-                                      width: MediaQuery.of(context).size.width * 0.09,
+                                      width: MediaQuery.of(context).size.width * 0.04,
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 8),
+                                      padding: const EdgeInsets.only(left: 8,right: 8),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                       mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Bank Soal ",
@@ -134,7 +136,9 @@ class _HalamanMapelState extends State<SubjectPage> {
                           ),
                         ),
                         SizedBox(width: 16),
-                        Expanded(
+                       Container(
+                              height: MediaQuery.of(context).size.width * 0.05,
+                              
                           child: ShadowedContainer(
                             shadowColor: prov.color,
                             child: InkWell(
@@ -147,16 +151,16 @@ class _HalamanMapelState extends State<SubjectPage> {
                               },
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 6),
-                                child: Row(
+                                child: Row(crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Image.asset(
                                       "asset/formatif.png",
-                                      width: MediaQuery.of(context).size.width * 0.09,
+                                      width: MediaQuery.of(context).size.width * 0.04,
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 8),
+                                      padding: const EdgeInsets.only(left: 8,right: 8),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                       mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Materi Sekolah ",
@@ -208,7 +212,7 @@ class _HalamanMapelState extends State<SubjectPage> {
                               );
                             },
                             child: SizedBox(
-                              height: MediaQuery.of(context).size.width * 0.18,
+                              height: MediaQuery.of(context).size.width * 0.05,
                               child: ShadowedContainer(
                                 shadowColor: prov.color,
                                 child: Row(

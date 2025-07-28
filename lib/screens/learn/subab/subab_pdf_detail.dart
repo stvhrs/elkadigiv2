@@ -289,13 +289,13 @@ class _SubabPdfDetailState extends State<SubabPdfDetail>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: CircleAvatar(
-        backgroundColor: context.read<NavigationProvider>().color,
-        child: IconButton(
-          onPressed: _downloadAndShare,
-          icon: Icon(Icons.download_rounded, color: Colors.white),
-        ),
-      ),
+      // floatingActionButton: CircleAvatar(
+      //   backgroundColor: context.read<NavigationProvider>().color,
+      //   child: IconButton(
+      //     onPressed: _downloadAndShare,
+      //     icon: Icon(Icons.download_rounded, color: Colors.white),
+      //   ),
+      // ),
       appBar: AppBar(
         backgroundColor: context.read<NavigationProvider>().color,
         actions: [

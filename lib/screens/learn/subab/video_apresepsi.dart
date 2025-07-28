@@ -43,7 +43,7 @@ class VideoApresepsi extends StatelessWidget {
               color: Helper.lightenColor(Color.fromRGBO(53, 53, 53, 1), 0.7),
             ),
             child: Container(
-              height: MediaQuery.of(context).size.width * 0.2,
+              height: MediaQuery.of(context).size.width * 0.06,
               child: Container(
                 decoration: BoxDecoration(
                   boxShadow: [

@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:elka/main.dart';
 import 'package:elka/provider/navigation_provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +42,7 @@ class VideoPageState extends State<VideoPage> {
       final isShort = widget.link.contains("shorts");
       _controller = YoutubePlayerController(
         params: YoutubePlayerParams(
-          showFullscreenButton: false,
+          showFullscreenButton: true,
           strictRelatedVideos: true,
           showVideoAnnotations: false,
           enableJavaScript: false,
@@ -122,65 +123,71 @@ class VideoPageState extends State<VideoPage> {
                   //   auto = false;
                   //   log(" fullsceen");
                   // }
-                  return Scaffold(appBar: AppBar(),
+                  return Scaffold(
+                    appBar: AppBar(),
                     backgroundColor: Colors.white,
-                    body:
-                        ListView(
-                          children: [
-                           
-                                AspectRatio(
-                                  aspectRatio: _aspectRatio,
-                                  child: player,
-                                ),
-                             
+                    body: ListView(
+                      children: [
+                        SizedBox(
+                          child:
+                              defaultTargetPlatform == TargetPlatform.windows ||
+                                      defaultTargetPlatform ==
+                                          TargetPlatform.macOS
+                                  ? Transform.scale(scale: 0.8,alignment: Alignment.topCenter,
+                                    child: AspectRatio(
+                                      aspectRatio: 16 / 9,
+                                      child: player,
+                                    ),
+                                  )
+                                  : AspectRatio(
+                                    aspectRatio: _aspectRatio,
+                                    child: player,
+                                  ),
+                        ),
 
-                            if (!widget.link.contains("shorts"))
-                              Container(
-                                color: Colors.white,
-                                padding: const EdgeInsets.all(8.0),
-                                alignment: Alignment.topCenter,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    InkWell(
-                                      onTap:
-                                          () => _controller.enterFullScreen(),
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 12,
-                                          vertical: 4,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey.shade200,
-                                          borderRadius: BorderRadius.circular(
-                                            8,
+                        if (!widget.link.contains("shorts"))
+                          Container(
+                            color: Colors.white,
+                            padding: const EdgeInsets.all(8.0),
+                            alignment: Alignment.topCenter,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: () => _controller.enterFullScreen(),
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey.shade200,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Fullscreen ",
+                                          style: TextStyle(
+                                            color: prov.color,
+                                            fontSize: 14,
                                           ),
                                         ),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              "Fullscreen ",
-                                              style: TextStyle(
-                                                color: prov.color,
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                            Icon(
-                                              _isFullScreen
-                                                  ? Icons.fullscreen_exit
-                                                  : Icons.fullscreen,
-                                              color: prov.color,
-                                            ),
-                                          ],
+                                        Icon(
+                                          _isFullScreen
+                                              ? Icons.fullscreen_exit
+                                              : Icons.fullscreen,
+                                          color: prov.color,
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                          ],
-                        ),
-                    
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
                   );
                 },
               ),

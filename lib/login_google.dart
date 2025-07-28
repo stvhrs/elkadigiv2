@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -83,116 +84,130 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Spacer(),
-          Expanded(
-            flex: 3,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset("asset/locked.png", width: 80),
-                SizedBox(height: 8),
-                Text(
-                  "Kode Akses",
-                  style: TextStyle(
-                    color: Color.fromRGBO(53, 53, 53, 1),
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+      body: Center(
+        child: SizedBox(
+          width:
+              defaultTargetPlatform == TargetPlatform.windows ||
+                      defaultTargetPlatform == TargetPlatform.macOS
+                  ? 500
+                  : double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spacer(),
+              Expanded(
+                flex: 3,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset("asset/locked.png", width: 80),
+                    SizedBox(height: 8),
+                    Text(
+                      "Kode Akses",
+                      style: TextStyle(
+                        color: Color.fromRGBO(53, 53, 53, 1),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      "Masukan Kode yang sudah diberikan",
+                      style: TextStyle(
+                        color: Color.fromRGBO(53, 53, 53, 1),
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 4),
-                Text(
-                  "Masukan Kode yang sudah diberikan",
-                  style: TextStyle(
-                    color: Color.fromRGBO(53, 53, 53, 1),
-                    fontSize: 13,
-                  ),
-                ),
-              ],
-            ),
-          ),
+              ),
 
-          Expanded(
-            flex: 4,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                children: [
-                  Row(
+              Expanded(
+                flex: 4,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
                     children: [
                       Row(
                         children: [
-                          Image.asset("asset/siswa.png", width: 25),
-                          Text("  Siswa"),
-                          Checkbox(
-                            value: isSelected1,
-                            onChanged: (value) {
-                              handleCheckboxSelection(1);
-                            },
+                          Row(
+                            children: [
+                              Image.asset("asset/siswa.png", width: 25),
+                              Text("  Siswa"),
+                              Checkbox(
+                                value: isSelected1,
+                                onChanged: (value) {
+                                  handleCheckboxSelection(1);
+                                },
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: 16),
+                          Row(
+                            children: [
+                              Image.asset("asset/guru.png", width: 25),
+                              Text("  Guru"),
+                              Checkbox(
+                                value: isSelected2,
+                                onChanged: (value) {
+                                  handleCheckboxSelection(2);
+                                },
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                      SizedBox(width: 16),
-                      Row(
-                        children: [
-                          Image.asset("asset/guru.png", width: 25),
-                          Text("  Guru"),
-                          Checkbox(
-                            value: isSelected2,
-                            onChanged: (value) {
-                              handleCheckboxSelection(2);
-                            },
+                      // Gunakan Form dan validator pada TextFormField
+                      Form(
+                        key: _formKey, // Form Key
+                        child: TextFormField(
+                          onChanged: (v) {},
+                          controller: _controller,
+                          style: TextStyle(
+                            color: Color.fromRGBO(53, 53, 53, 1),
                           ),
-                        ],
+                          decoration: InputDecoration(
+                            hintStyle: TextStyle(
+                              fontSize: 13,
+                              color: Colors.grey,
+                            ),
+                            alignLabelWithHint: true,
+                            hintText: "Cont. PWD105123271",
+                            prefixIcon: Icon(
+                              Icons.lock_rounded,
+                              size: 20,
+                              color: Color.fromRGBO(103, 164, 114, 1),
+                            ),
+
+                            border: OutlineInputBorder(),
+                          ),
+                          // Menambahkan validator
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Kode akses tidak boleh kosong';
+                            } else if (value.length <= 7) {
+                              return 'Kode akses harus lebih dari 7 karakter';
+                            }
+                            return null; // Valid
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 48),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ButtonGoogleLong(
+                          handleSignIn,
+                          "Masuk Dengan Google",
+                          false,
+                        ),
                       ),
                     ],
                   ),
-                  // Gunakan Form dan validator pada TextFormField
-                  Form(
-                    key: _formKey, // Form Key
-                    child: TextFormField(
-                      onChanged: (v) {},
-                      controller: _controller,
-                      style: TextStyle(color: Color.fromRGBO(53, 53, 53, 1)),
-                      decoration: InputDecoration(
-                        hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
-                        alignLabelWithHint: true,
-                        hintText: "Cont. PWD105123271",
-                        prefixIcon: Icon(
-                          Icons.lock_rounded,
-                          size: 20,
-                          color: Color.fromRGBO(103, 164, 114, 1),
-                        ),
-
-                        border: OutlineInputBorder(),
-                      ),
-                      // Menambahkan validator
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Kode akses tidak boleh kosong';
-                        } else if (value.length <= 7) {
-                          return 'Kode akses harus lebih dari 7 karakter';
-                        }
-                        return null; // Valid
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 48),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ButtonGoogleLong(
-                      handleSignIn,
-                      "Masuk Dengan Google",
-                      false,
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -255,7 +270,6 @@ class _ButtonGoogleLongState extends State<ButtonGoogleLong> {
     );
   }
 }
-
 
 // import 'package:elka/model/school.dart';
 // import 'package:elka/model/user.dart';

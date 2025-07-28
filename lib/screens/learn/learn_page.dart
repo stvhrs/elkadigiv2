@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:elka/main.dart';
 import 'package:elka/provider/navigation_provider.dart';
 import 'package:elka/screens/appbar.dart';
+import 'package:elka/screens/emodul/emodul.dart';
 import 'package:elka/screens/learn/learn_button.dart';
 import 'package:elka/screens/learn/tryout_tka.dart';
 import 'package:elka/service/firebase_service.dart';
@@ -17,8 +18,7 @@ class LearnPage extends StatefulWidget {
   State<LearnPage> createState() => _LearnPageState();
 }
 
-class _LearnPageState extends State<LearnPage>
-    {
+class _LearnPageState extends State<LearnPage> {
   @override
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
@@ -40,7 +40,6 @@ class _LearnPageState extends State<LearnPage>
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: CustomAppbar(),
       body: RefreshIndicator(
@@ -55,61 +54,93 @@ class _LearnPageState extends State<LearnPage>
             shrinkWrap: true,
             padding: EdgeInsets.zero,
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-
-                child: Text(
-                  "Belajar dengan E-Modul",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13,
-                    color: Color.fromARGB(255, 75, 75, 75),
-                  ),
-                ),
-              ),
-
               SizedBox(height: 16),
-              Consumer<NavigationProvider>(
-                builder: (context, data, c) {
-                  return GridView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: 8),
-                    primary: false,
-                    shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 3 / 4.7,
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 20,
-                    ),
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: data.subjects!.length,
-                    itemBuilder:
-                        (context, index) => LearnButton(
-                          context.read<NavigationProvider>().subjects![index],
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(
+                            left: 8,
+                            bottom: 16,
+                            top: 24,
+                          ),
+
+                          child: Text(
+                            "Belajar dengan E-Modul",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Color.fromARGB(255, 75, 75, 75),
+                            ),
+                          ),
                         ),
-                  );
-                },
-              ),
-
-              Container(
-                padding: const EdgeInsets.only(left: 8, bottom: 16, top: 24),
-
-                child: Text(
-                  "Tryout TKA",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13,
-                    color: Color.fromARGB(255, 75, 75, 75),
+                        Consumer<NavigationProvider>(
+                          builder: (context, data, c) {
+                            return GridView.builder(
+                              padding: EdgeInsets.symmetric(horizontal: 8),
+                              primary: false,
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                    childAspectRatio: 3 / 4.7,
+                                    crossAxisCount: 3,
+                                    crossAxisSpacing: 16,
+                                    mainAxisSpacing: 20,
+                                  ),
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: data.subjects!.length,
+                              itemBuilder:
+                                  (context, index) => LearnButton(
+                                    context
+                                        .read<NavigationProvider>()
+                                        .subjects![index],
+                                  ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                  SizedBox(width: 24),
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(
+                            left: 8,
+                            bottom: 16,
+                            top: 24,
+                          ),
+
+                          child: Text(
+                            "Tryout TKA",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Color.fromARGB(255, 75, 75, 75),
+                            ),
+                          ),
+                        ),
+                        TryoutTka(),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 24),
+                  Expanded(
+                    child: SizedBox(height: 1200, width: 400, child: Emodul()),
+                  ),
+                ],
               ),
-              TryoutTka(),
             ],
           ),
         ),
       ),
     );
   }
-
-  
 }
